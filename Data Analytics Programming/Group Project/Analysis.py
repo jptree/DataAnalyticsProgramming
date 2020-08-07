@@ -58,6 +58,8 @@ def linear(df, subset):
 
 
 
+
+
     if subset:
         X = df[df['Top Genre'] == subset]
         X = X[['Year', 'Beats Per Minute (BPM)', 'Energy', 'Danceability', 'Loudness (dB)', 'Liveness',
