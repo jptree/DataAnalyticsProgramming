@@ -12,7 +12,7 @@ pd.options.display.width = 0
 df_spotify = pd.read_csv('Spotify-2000.csv')
 
 
-print(df_spotify.sort_values(by='Popularity', ascending=False))
+# print(df_spotify.sort_values(by='Popularity', ascending=False))
 
 # print("', '".join(df_spotify.columns))
 
@@ -81,13 +81,26 @@ def linear(df, subset):
     print(result.summary())
 
 
+# Which genres were more popular coming through 1950s to 2000s?
+def question_one(df):
+    d = df.groupby(['Year'])['Top Genre'].value_counts()
+    for i in range(1950, 2020):
+        try:
+            print(i, d.loc[i].axes[0].tolist()[0])
+        except KeyError:
+            print(i)
 
-# print(df_spotify['Top Genre'].value_counts().index)
 
-# for genre in list(df_spotify['Top Genre'].value_counts().index):
-#     linear(df_spotify, genre)
+# Songs of which genre mostly saw themselves landing in the Top 2000s
+def question_two(df):
+    d = df['Top Genre'].value_counts()[:15]
+    d.plot(kind='bar')
+    plt.tight_layout()
+    plt.show()
+    # print(list(d.axes))
+
+    # print(d[:10])
 
 
-
-# kmeans(df_spotify)
-# linear(df_spotify, False)
+# question_two(df_spotify)
+question_one(df_spotify)
